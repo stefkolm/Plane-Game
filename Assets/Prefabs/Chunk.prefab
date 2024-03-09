@@ -240,3 +240,7 @@ MonoBehaviour:
   numberOfObjects: 40
   spawnHeight: 20
   chunkPrefab: {fileID: 886430995993858137}
+  coinPrefab: {fileID: 1630860186881963831, guid: eb161006557621247877afa4beb86eb0,
+    type: 3}
+  distanceBetweenCoins: 5
+  numberOfCoins: 5

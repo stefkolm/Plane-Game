@@ -15,9 +15,14 @@ public class Player : MonoBehaviour
     private float maxDistance = 10f;
     public LayerMask groundLayer;
 
+    private float lastCoinPickupTime;
+    float pitch = 1f;
+
     [Header("References")]
     public GameManager gameManager;
     public GameObject ChunkPrefab;  
+    public AudioSource audioSource;
+    public AudioClip coinPickSound;
 
     void Update()
     {
@@ -65,6 +70,24 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void CollectCoin(Collider other)
+    {
+        float timeSinceLastCoinPickup = Time.time - lastCoinPickupTime;
+        if (timeSinceLastCoinPickup >= 1f)
+        {
+            pitch = 1f;
+        }
+        else
+        {
+            pitch += 0.1f;
+        }
+        audioSource.pitch = pitch;
+        audioSource.PlayOneShot(coinPickSound);
+        Destroy(other.gameObject);
+
+        lastCoinPickupTime = Time.time;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
@@ -95,5 +118,11 @@ public class Player : MonoBehaviour
             NewChunk.transform.GetChild(0).transform.localPosition = new Vector3(0f, targetTriggerPos, 19.8f);
             Destroy(parent.gameObject, 5f);
         }
+
+        if(other.CompareTag("Coin"))
+        {
+            CollectCoin(other);
+        }
     }
+
 }
