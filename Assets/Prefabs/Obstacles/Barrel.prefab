@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3362347376470009608}
   - component: {fileID: 4252953566578833364}
   - component: {fileID: 3732905214784261781}
-  - component: {fileID: -6297227981891271678}
   - component: {fileID: 1591180494215788875}
   m_Layer: 0
   m_Name: Barrel
@@ -88,22 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-6297227981891271678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2812677331825217471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c83d20c72cfc22f4992636dc2d0269b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  sphere: {fileID: 0}
 --- !u!65 &1591180494215788875
 BoxCollider:
   m_ObjectHideFlags: 0

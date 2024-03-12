@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    [Header("Properties")]
     public float speed = 5f;
     public Vector3 direction = new Vector3(-1, -1, 0);
-    private bool hitedGround = false;
-    public GameObject ExplosionParticles;
-    public GameObject FlyParticles;
     public float meteor_deep;
-    private CameraShake cameraShake;
+
+    [Header("References")]
     public AudioSource audioSource;
     public AudioClip explosionSound;
+    public GameObject ExplosionParticles;
+    public GameObject FlyParticles;
+
+    private bool hitedGround = false;
+    private CameraShake cameraShake;
 
     void Update()
     {

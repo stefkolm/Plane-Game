@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 public class GameManager : MonoBehaviour
 {
     [Header("Properties")]
-
+    public bool MeteorShowers;
 
     [Header("References")]
     public GameObject player;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         scoreText.text = player.transform.position.z.ToString("F0") + " m";
-        if(player.transform.position.z > 100f && readyForEvent)
+        if(player.transform.position.z > 100f && readyForEvent && MeteorShowers)
         {
             readyForEvent = false;
             StartCoroutine(MeteorShower());

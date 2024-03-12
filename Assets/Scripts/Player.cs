@@ -37,8 +37,14 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         float axis = Input.GetAxis("Horizontal");
-        Vector3 vector = transform.forward * moveSpeed * Time.deltaTime;
-        transform.position += vector;
+        Vector3 movement = transform.forward * moveSpeed * Time.deltaTime;
+        Vector3 newPosition = transform.position + movement;
+
+        // Clamp the x position within the range of -40 to 40
+        newPosition.x = Mathf.Clamp(newPosition.x, -40f, 40f);
+
+        // Apply the clamped position
+        transform.position = newPosition;
 
         float num = -axis * maxRotation;
         Quaternion b = Quaternion.Euler(0f, -num, -maxAngle * axis);
