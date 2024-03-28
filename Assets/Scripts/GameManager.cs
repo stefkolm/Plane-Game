@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public GameObject meteorPrefab;
     public GameObject gameOverScreen;
-    public TextMeshProUGUI finalScoreText;
+    public GameObject LoseVolume;
+    public GameObject ExplosionEffect;
 
     [Header("Debug")]
     private bool readyForEvent = true;
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
             readyForEvent = false;
             StartCoroutine(MeteorShower());
         }
-        if(gameOver && Input.GetKeyDown(KeyCode.Space)) 
+        if(gameOver && Input.anyKey) 
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -46,10 +47,13 @@ public class GameManager : MonoBehaviour
     {
         gameOver = true;
         gameOverScreen.SetActive(true);
+        LoseVolume.SetActive(true);
         player.GetComponent<Player>().enabled = false;
         player.GetComponent<BoxCollider>().enabled = false;
         finalScore = player.transform.position.z;
-        finalScoreText.text = finalScore.ToString("F0");
+        GameObject oldExplosionEffect = Instantiate(ExplosionEffect, player.transform.position, player.transform.rotation);
+        player.SetActive(false);
+        Destroy(oldExplosionEffect, 2f);
     }
 
     IEnumerator MeteorShower()

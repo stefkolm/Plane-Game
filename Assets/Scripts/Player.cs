@@ -24,6 +24,10 @@ public class Player : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip coinPickSound;
 
+    private void Start()
+    {
+        Application.targetFrameRate = 144;
+    }
     void Update()
     {
         HandleMovement();
