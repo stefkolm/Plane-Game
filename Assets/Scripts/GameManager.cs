@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             readyForEvent = false;
             StartCoroutine(MeteorShower());
         }
-        if(gameOver && Input.anyKey) 
+        if(gameOver && Input.anyKeyDown) 
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

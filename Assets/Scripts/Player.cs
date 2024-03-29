@@ -23,10 +23,13 @@ public class Player : MonoBehaviour
     public GameObject ChunkPrefab;  
     public AudioSource audioSource;
     public AudioClip coinPickSound;
+    private PlayerPerks playerPerksScript;
 
     private void Start()
     {
-        Application.targetFrameRate = 144;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        playerPerksScript = GetComponent<PlayerPerks>();
     }
     void Update()
     {
@@ -44,10 +47,7 @@ public class Player : MonoBehaviour
         Vector3 movement = transform.forward * moveSpeed * Time.deltaTime;
         Vector3 newPosition = transform.position + movement;
 
-        // Clamp the x position within the range of -40 to 40
         newPosition.x = Mathf.Clamp(newPosition.x, -40f, 40f);
-
-        // Apply the clamped position
         transform.position = newPosition;
 
         float num = -axis * maxRotation;
@@ -102,8 +102,21 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            gameManager.GameOver();
+            if (!playerPerksScript.ExtraLife())
+            {
+                gameManager.GameOver();
+            }
+            else
+            {
+                GetComponent<BoxCollider>().enabled = false;
+                Invoke("SetColliderActive", 1f);
+            }
         }
+    }
+
+    private void SetColliderActive()
+    {
+        GetComponent<BoxCollider>().enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -55,7 +55,7 @@ public class BlackHole : MonoBehaviour
             {
                 rb.AddForce(Vector3.left * gravitationalConstant * Time.deltaTime);
             }
-            Quaternion targetRotation = Quaternion.LookRotation(-directionToCenter, Vector3.up);
+            Quaternion targetRotation = Quaternion.LookRotation(-directionToCenter, Vector3.forward);
             player.GetChild(0).transform.rotation = Quaternion.Slerp(player.GetChild(0).transform.rotation, targetRotation, Time.deltaTime * 1f);
         }
         
